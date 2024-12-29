@@ -2,7 +2,7 @@
 
 Building AI course project
 
-"## Summary"
+## Summary
 A machine learning system designed to analyze banking transactions and detect fraudulent activities. It identifies suspicious patterns, minimizes financial losses, and ensures users' financial security in real time.
 
 ## **Background**
