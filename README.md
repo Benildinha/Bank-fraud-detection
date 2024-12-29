@@ -3,17 +3,31 @@
 Building AI course project
 
 ## **Summary**
-A system that analyzes banking transactions to detect fraudulent activities. It uses machine learning algorithms to identify anomalous patterns and ensure users' financial security.
+A machine learning system designed to analyze banking transactions and detect fraudulent activities. It identifies suspicious patterns, minimizes financial losses, and ensures users' financial security in real time.
 
 ## **Background**
-Fraudulent activities in financial transactions are a growing problem, impacting both consumers and financial institutions.
-* **Global impact**: Financial losses due to fraud exceed billions of dollars annually.
-* **Proposed solution**: Create a system that detects suspicious patterns in real time, reducing losses and protecting users.
+Fraudulent activities in financial transactions are a growing problem, impacting consumers and financial institutions:
+
+**Global Impact:** Financial losses due to fraud exceed billions of dollars annually.
+**Personal Impact:** Millions of individuals face stress and loss of funds due to fraud.
+**Proposed Solution:** Leverage AI to detect fraudulent activities in real-time, minimizing losses and improving trust in financial systems.
+
+## **Motivation**
+Enhance financial security for users and institutions.
+Reduce operational costs associated with fraud investigation.
+Build user trust through reliable fraud detection mechanisms.
 
 ## **How is it used?**
-1. The system collects and analyzes data from banking transactions.
-2. Machine learning algorithms identify unusual activities.
-3. The system automatically alerts banks or users to review suspicious transactions.
+
+**Workflow**
+Input: Transaction details (e.g., amount, time, location, account history).
+Processing: Machine learning models analyze patterns and detect anomalies.
+Output: Fraud detection results (fraudulent or legitimate), along with fraud scores.
+
+**Usage Scenario**
+Banking Systems: Integrated into banking applications for real-time fraud monitoring.
+Alerts: Notify banks or users of suspicious transactions.
+Reports: Detailed transaction analysis for further investigation.
 
 ### **Workflow**
 - **Input**: Transaction data (e.g., amount, time, location).
@@ -46,7 +60,4 @@ The data can be generated or obtained from public repositories, such as:
 - The machine learning community for sharing insights and techniques.
 - Inspiration from fraud detection studies and AI research projects.
 
----
-
-This README is formatted to meet GitHub standards and is ready for you to add images, sample datasets, and code.
 
