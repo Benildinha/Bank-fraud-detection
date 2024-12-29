@@ -1,27 +1,37 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
+import numpy as np
+import random
 
-# Loadind the data
-data = pd.read_csv('data/transactions.csv')
+def main():
+    N = 100  # Tamanho do problema (N x N)
+    steps = 3000  # Número total de iterações
+    tracks = 50  # Número de trilhas de otimização
 
-# Preparing the data
-X = data.drop(columns=['IsFraud'])
-y = data['IsFraud']
+    def generator(x, y, x0=0.0, y0=0.0):
+        return np.sin((x / N - x0) * np.pi) + np.sin((y / N - y0) * np.pi) + \
+               0.07 * np.cos(12 * (x / N - x0) * np.pi) + 0.07 * np.cos(12 * (y / N - y0) * np.pi)
 
-# Splitting the data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    x0 = np.random.random() - 0.5
+    y0 = np.random.random() - 0.5
+    h = np.fromfunction(np.vectorize(generator), (N, N), x0=x0, y0=y0, dtype=int)
+    peak_x, peak_y = np.unravel_index(np.argmax(h), h.shape)
 
-# Training the model
-model = RandomForestClassifier(random_state=42)
-model.fit(X_train, y_train)
+    x = np.random.randint(0, N, tracks)
+    y = np.random.randint(0, N, tracks)
 
-# Evaluating the model
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Model accuracy: {accuracy:.2f}")
+    for step in range(steps):
+        T = max(0.01, ((steps - step) / steps) ** 3 - 0.005)
 
-# Saving the model
-import joblib
-joblib.dump(model, 'models/model.pkl')
+        for i in range(tracks):
+            x_new = np.random.randint(max(0, x[i] - 2), min(N, x[i] + 3))
+            y_new = np.random.randint(max(0, y[i] - 2), min(N, y[i] + 3))
+
+            S_old = h[x[i], y[i]]
+            S_new = h[x_new, y_new]
+
+            if S_new > S_old or random.random() < np.exp(-(S_old - S_new) / T):
+                x[i], y[i] = x_new, y_new
+
+    num_tracks_at_peak = sum([x[j] == peak_x and y[j] == peak_y for j in range(tracks)])
+    print(f"Number of tracks at the peak: {num_tracks_at_peak}")
+
+main()
