@@ -1,10 +1,11 @@
 import numpy as np
 import random
+import pickle
 
 def main():
-    N = 100  # Tamanho do problema (N x N)
-    steps = 3000  # Número total de iterações
-    tracks = 50  # Número de trilhas de otimização
+    N = 100
+    steps = 3000
+    tracks = 50
 
     def generator(x, y, x0=0.0, y0=0.0):
         return np.sin((x / N - x0) * np.pi) + np.sin((y / N - y0) * np.pi) + \
@@ -34,4 +35,9 @@ def main():
     num_tracks_at_peak = sum([x[j] == peak_x and y[j] == peak_y for j in range(tracks)])
     print(f"Number of tracks at the peak: {num_tracks_at_peak}")
 
-main()
+    with open('models/model.pkl', 'wb') as file:
+        pickle.dump({'landscape': h, 'peak': (peak_x, peak_y)}, file)
+    print("Model saved to 'models/model.pkl'")
+
+if __name__ == "__main__":
+    main()
